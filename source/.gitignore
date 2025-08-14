@@ -1,0 +1,57 @@
+# ---------------- .NET / Avalonia build outputs ----------------
+# Build artifacts for all configurations and target frameworks
+[Bb]in/
+[Oo]bj/
+out/
+bin/
+obj/
+artifacts/
+dist/
+publish/
+
+# Visual Studio solution-level intermediates and user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ---------------- Tests & benchmarking ----------------
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+BenchmarkDotNet.Artifacts/
+
+# ---------------- Logs & diagnostics ----------------
+*.log
+*.dmp
+*.stackdump
+
+# ---------------- IDE settings/caches ----------------
+# Visual Studio
+.vs/
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+_ReSharper*/
+# VS Code (uncomment if you don't want to track workspace settings)
+# .vscode/
+
+# ---------------- OS-generated files ----------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------------- NuGet (legacy layout) ----------------
+packages/
+
+# ---------------- distribution artifacts ----------------
+# *.zip
+# *.tar.gz
+# *.msi
+# *.exe
+# *.dmg
+# *.pkg
+# *.app/
+# *.pfx  # code-signing key — usually keep out of git

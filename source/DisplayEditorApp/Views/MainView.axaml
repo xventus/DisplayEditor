@@ -1,0 +1,213 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:DisplayEditorApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
+             x:Class="DisplayEditorApp.Views.MainView"
+             x:DataType="vm:MainViewModel">
+	<UserControl.Styles>
+		<!-- existing file -->
+		<Style Selector="TextBlock.file-item">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontWeight" Value="Normal"/>
+		</Style>
+
+		<!-- non existing  -->
+		<Style Selector="TextBlock.file-item[IsEnabled=False]">
+			<Setter Property="Foreground" Value="Gray"/>
+			<Setter Property="FontWeight" Value="Light"/>
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Design.DataContext>
+		<vm:MainViewModel />
+	</Design.DataContext>
+	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto" ColumnDefinitions="*">
+		<Grid.Margin>
+			<Thickness>30</Thickness>
+		</Grid.Margin>
+		<!-- Caption -->
+		<TextBlock Text="Display Editor" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 20"/>
+
+		<!-- Control buttons and mode selection -->
+		<Grid Grid.Row="3" ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*">
+			<Button Grid.Column="0" Content="Select Folder" Command="{Binding SelectFolderCommand}"
+                    HorizontalAlignment="Left" Margin="0,10,10,10" Padding="10,5" FontSize="16"
+					Classes="orange-button"/>
+			
+			<Button Grid.Column="3" Content="Settings" Command="{Binding SettingsCommand}"
+                    HorizontalAlignment="Left" Margin="0,10,20,10" Padding="10,5" FontSize="16"
+                    Classes="orange-button"/>
+
+			<!-- Mode selection -->
+			<TextBlock Grid.Column="4" Text="Mode:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="14"/>
+
+			<StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center">
+				<RadioButton Content="Psalm" IsChecked="{Binding IsSimpleMode}"
+                             GroupName="ModeGroup" Margin="0,0,15,0"/>
+				<RadioButton Content="Hymnal" IsChecked="{Binding IsExtendedMode}"
+                             GroupName="ModeGroup"/>
+			</StackPanel>
+		</Grid>
+
+		<!-- Selected dir -->
+		<TextBlock Grid.Row="4" Text="{Binding SelectedFolder}" FontSize="12" Foreground="Gray"
+                   TextWrapping="Wrap" Margin="0 10"/>
+
+		<!-- file / dir list -->
+		<Border Grid.Row="5" Padding="10" Background="#AAA" CornerRadius="8">
+			<Grid>
+				<!-- Simple Mode Layout -->
+				<Grid ColumnDefinitions="1*,2*,Auto" RowDefinitions="*" IsVisible="{Binding IsSimpleMode}">
+					<!-- ListBox with files / dirs -->
+					<ListBox Grid.Column="0" ItemsSource="{Binding FilesInFolder}"
+	                         SelectedItem="{Binding SelectedFile}" Margin="0,0,10,0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Name}"
+										   Classes="file-item"
+										   IsEnabled="{Binding Exists}"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+
+					<!--View Content - Auto-sized Centered -->
+          <Grid Grid.Column="1" Margin="0,0,10,0">
+            <Border x:Name="SimpleTextBoxBorder"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Gray"
+                    Margin="0">
+              <Grid RowDefinitions="Auto,*">
+                <!-- caption -->
+                <Border Background="Blue">
+                  <TextBlock
+                      Text="{Binding SelectedFileTitle}"
+                      FontFamily="Consolas"
+                      FontSize="{Binding CalculatedFontSize}"
+                      Foreground="White"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      Padding="50,30,50,0"
+                      TextAlignment="Center"/>
+                </Border>
+                <!-- content -->
+                <TextBox x:Name="SimpleTextBox"
+                         Grid.Row="1"
+                         Margin="0"
+                         FontFamily="Consolas"
+                         FontSize="{Binding CalculatedFontSize}"
+                         Text="{Binding SelectedFileContent}"
+                         TextWrapping="NoWrap"
+                         AcceptsReturn="False"
+                         IsReadOnly="True"
+                         Background="Blue"
+                         Foreground="Yellow"
+                         CaretBrush="Transparent"
+                         BorderThickness="0"
+                         Padding="50,10,50,50"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         HorizontalContentAlignment="Center"
+                         VerticalContentAlignment="Top"
+                         MaxLines="{Binding MaxRowsFromSettings}"
+                         MaxLength="{Binding MaxLengthFromSettings}"
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                         IsHitTestVisible="False"/>
+              </Grid>
+            </Border>
+          </Grid>
+
+					<!-- Vertical buttons for Simple mode -->
+					<StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0">
+						<Button Content="Edit" Command="{Binding EditCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+						<Button Content="New" Command="{Binding NewCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+						<Button Content="Delete" Command="{Binding DeleteCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+						<Button Content="Export list" Command="{Binding ExportCommand}"
+                                Margin="0,0,0,50" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+					</StackPanel>
+				</Grid>
+
+				<!-- Extended Mode Layout -->
+				<Grid ColumnDefinitions="1*,1*,3*,Auto" RowDefinitions="*" IsVisible="{Binding IsExtendedMode}" MinHeight="400">
+					<!-- Files ListBox (narrower) -->
+					<ListBox Grid.Column="0" ItemsSource="{Binding FilesInFolder}"
+	                         SelectedItem="{Binding SelectedFile}" Margin="0,0,5,0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Name}"
+										   Classes="file-item"
+										   IsEnabled="{Binding Exists}"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+
+					<!-- SubFolder Files ListBox -->
+					<ListBox Grid.Column="1" ItemsSource="{Binding SubFolderFiles}"
+	                         SelectedItem="{Binding SelectedSubFile}" Margin="5,0,5,0"
+	                         IsVisible="{Binding IsSubFolderVisible}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding Name}"
+										   Classes="file-item"
+										   IsEnabled="{Binding Exists}"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+
+					<!-- View Content (narrower) - Auto-sized Centered -->
+					<Grid Grid.Column="2" Margin="0,0,10,0">
+						<Border x:Name="ExtendedTextBoxBorder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+								Background="Gray" Margin="0" >
+							<TextBox x:Name="ExtendedTextBox"
+								Margin="20"
+								FontFamily="Consolas"
+								FontSize="{Binding CalculatedFontSize}"
+								Text="{Binding SelectedFileContent}"
+								TextWrapping="NoWrap"
+								AcceptsReturn="False"
+								IsReadOnly="True"
+								Background="Blue"
+								Foreground="Yellow"
+								CaretBrush="Transparent"
+								BorderThickness="0"
+								Padding="50"
+								HorizontalAlignment="Stretch"
+								VerticalAlignment="Stretch"
+								HorizontalContentAlignment="Center"
+								VerticalContentAlignment="Top"
+								MaxLines="{Binding MaxRowsFromSettings}"
+								MaxLength="{Binding MaxLengthFromSettings}"
+								ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+								ScrollViewer.VerticalScrollBarVisibility="Hidden"
+							    IsHitTestVisible="False" />
+						</Border>
+					</Grid>
+
+					<!-- Vertical buttons for Extended mode -->
+					<StackPanel Grid.Column="3" Orientation="Vertical" VerticalAlignment="Top" Margin="5,0,0,0">
+						<Button Content="Edit" Command="{Binding EditCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+						<Button Content="New" Command="{Binding NewCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+						<Button Content="Delete" Command="{Binding DeleteCommand}"
+                                Margin="0,0,0,10" Padding="15,8" FontSize="14" Width="80"
+                                Classes="orange-button"/>
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

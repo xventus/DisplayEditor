@@ -1,0 +1,38 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="DisplayEditorApp.App"
+             RequestedThemeVariant="Dark">
+
+	<Application.Styles>
+		
+		<FluentTheme />
+
+		
+		<Style Selector="Label">
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+
+		<Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		
+		<Style Selector="TextBox">
+			<Setter Property="Background" Value="#333"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		
+		
+		<Style Selector="Button.orange-button">
+			<Setter Property="Background" Value="Orange"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+		
+		<Style Selector="Button.orange-button:pointerover">
+			<Setter Property="Background" Value="Black"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+	</Application.Styles>
+</Application>
+
+
+

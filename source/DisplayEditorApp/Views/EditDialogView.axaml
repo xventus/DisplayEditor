@@ -1,0 +1,75 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DisplayEditorApp.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="500"
+        x:Class="DisplayEditorApp.Views.EditDialogView"
+        x:DataType="vm:EditDialogViewModel"
+        Title="File Editor"
+        Width="600" Height="500"
+        WindowStartupLocation="CenterOwner"
+        CanResize="True">
+
+	<Design.DataContext>
+		<vm:EditDialogViewModel />
+	</Design.DataContext>
+
+	<Grid RowDefinitions="Auto,*,Auto" Margin="20">
+		<!-- Header -->
+		<TextBlock Grid.Row="0" Text="{Binding FileName}"
+                   FontSize="16" FontWeight="Bold"
+                   Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+		<!-- Editor -->
+		<Border Grid.Row="1" BorderBrush="Red" BorderThickness="2"
+                Background="Black" Margin="0,0,0,20" CornerRadius="5">
+			<Grid RowDefinitions="*,Auto">
+				<!-- Colored Display -->
+				<ScrollViewer Grid.Row="0" Name="ColoredTextViewer">
+					<TextBlock Name="ColoredTextBlock"
+                               FontFamily="Consolas"
+                               FontSize="18"
+                               Background="Black"
+                               Padding="10"
+                               TextWrapping="NoWrap"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"/>
+				</ScrollViewer>
+
+				<!-- Hidden editable TextBox -->
+				<TextBox Grid.Row="1" Name="EditableTextBox"
+                         Text="{Binding FileContent}"
+                         FontFamily="Consolas"
+                         FontSize="18"
+                         Background="DarkGray"
+                         Foreground="White"
+                         BorderThickness="1"
+                         BorderBrush="Gray"
+                         Padding="10"
+                         TextWrapping="NoWrap"
+                         AcceptsReturn="False"
+                         AcceptsTab="True"
+                         HorizontalAlignment="Stretch"
+                         Height="190"
+                         MaxLines="15"
+                         MaxLength="600"
+                         TextChanged="OnTextBoxTextChanged"
+                         Watermark="Edit here..."/>
+			</Grid>
+		</Border>
+
+		<!-- Buttons -->
+		<StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+			<Button Content="OK" Command="{Binding OkCommand}"
+                    Padding="20,8" Margin="0,0,10,0" FontSize="14"
+                    Background="LightGreen" Foreground="Black"
+                    IsDefault="True"/>
+			<Button Content="Cancel" Command="{Binding CancelCommand}"
+                    Padding="20,8" FontSize="14"
+                    Background="LightCoral" Foreground="Black"
+                    IsCancel="True"/>
+		</StackPanel>
+	</Grid>
+</Window>

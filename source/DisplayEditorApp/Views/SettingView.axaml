@@ -1,0 +1,63 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="DisplayEditorApp.Views.SettingsView"
+        Title="Setting"
+        Width="500" Height="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="True">
+
+	<Grid RowDefinitions="Auto,*,Auto" Margin="20">
+		<!-- Header -->
+		<TextBlock Grid.Row="0" Text="Setting" FontSize="18" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+		<!-- Settings Form in ScrollViewer -->
+		<ScrollViewer Grid.Row="1" Margin="0,0,0,20">
+			<StackPanel Spacing="20">
+				<!-- Max Columns -->
+				<Grid ColumnDefinitions="150,*,50">
+					<TextBlock Grid.Column="0" Text="Columns:" VerticalAlignment="Center"/>
+					<Slider Grid.Column="1" Name="ColumnsSlider" Minimum="10" Maximum="40"
+                            Value="13" TickFrequency="1" IsSnapToTickEnabled="True" Margin="10,0"/>
+					<TextBlock Grid.Column="2" Text="{Binding #ColumnsSlider.Value}" VerticalAlignment="Center"/>
+				</Grid>
+
+				<!-- Max Rows -->
+				<Grid ColumnDefinitions="150,*,50">
+					<TextBlock Grid.Column="0" Text="Rows:" VerticalAlignment="Center"/>
+					<Slider Grid.Column="1" Name="RowsSlider" Minimum="2" Maximum="20"
+                            Value="15" TickFrequency="1" IsSnapToTickEnabled="True" Margin="10,0"/>
+					<TextBlock Grid.Column="2" Text="{Binding #RowsSlider.Value}" VerticalAlignment="Center"/>
+				</Grid>
+
+				<!-- Max Columns Ext -->
+				<Grid ColumnDefinitions="150,*,50">
+					<TextBlock Grid.Column="0" Text="Columns Ext:" VerticalAlignment="Center"/>
+					<Slider Grid.Column="1" Name="ColumnsSliderExt" Minimum="10" Maximum="40"
+                            Value="13" TickFrequency="1" IsSnapToTickEnabled="True" Margin="10,0"/>
+					<TextBlock Grid.Column="2" Text="{Binding #ColumnsSliderExt.Value}" VerticalAlignment="Center"/>
+				</Grid>
+
+				<!-- Max Rows Ext -->
+				<Grid ColumnDefinitions="150,*,50">
+					<TextBlock Grid.Column="0" Text="Rows Ext:" VerticalAlignment="Center"/>
+					<Slider Grid.Column="1" Name="RowsSliderExt" Minimum="2" Maximum="20"
+                            Value="15" TickFrequency="1" IsSnapToTickEnabled="True" Margin="10,0"/>
+					<TextBlock Grid.Column="2" Text="{Binding #RowsSliderExt.Value}" VerticalAlignment="Center"/>
+				</Grid>
+				
+
+			</StackPanel>
+		</ScrollViewer>
+
+		<!-- Buttons -->
+		<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+			<Button Content="Reset" Click="OnResetClick" Padding="20,8"
+                    Background="LightGray" Foreground="Black"/>
+			<Button Content="OK" Click="OnOkClick" Padding="20,8" IsDefault="True"
+                    Background="LightGreen" Foreground="Black"/>
+			<Button Content="Storno" Click="OnCancelClick" Padding="20,8" IsCancel="True"
+                    Background="LightCoral" Foreground="Black"/>
+		</StackPanel>
+	</Grid>
+</Window>
