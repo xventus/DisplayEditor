@@ -3,10 +3,16 @@
 Editor written in C# and Avalonia framework for editing data for display from project https://github.com/xventus/Church-psalm-hymn-display . 
 Use only for non-commercial purposes !
 
+
+
+
+<p align="center">
+  <img src="img/screen.png"  width="49%">
+  <img src="img/screen2.png" width="49%">
+</p>
+
+
 Here only description in Czech language.
-
-
-
 ---
 
 ## Rychlý start
@@ -15,6 +21,8 @@ Here only description in Czech language.
    - Aplikace pracuje s podadresáři:
      - `zalmy` (pro **Simple** režim),
      - `kancional` (pro **Extended** režim).
+       
+   Idealáně začít s https://github.com/xventus/Church-psalm-hymn-display/blob/master/SD%20card/SD.zip
 
 2. **Přepnutí režimu**
    - **Simple**: seznam souborů `001.txt … 996.txt` v `zalmy`.
