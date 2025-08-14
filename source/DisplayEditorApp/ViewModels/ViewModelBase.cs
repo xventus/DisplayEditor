@@ -1,4 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿//
+// vim: ts=4 et
+// Copyright (c) 2025 Petr Vanek
+// @author Petr Vanek, petr@fotoventus.cz
+
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace DisplayEditorApp.ViewModels;
 

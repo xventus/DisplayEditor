@@ -1,4 +1,9 @@
-﻿using Avalonia.Controls;
+﻿//
+// vim: ts=4 et
+// Copyright (c) 2025 Petr Vanek
+// @author Petr Vanek, petr@fotoventus.cz
+
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using DisplayEditorApp.Settings;
 

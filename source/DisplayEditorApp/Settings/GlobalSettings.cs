@@ -1,4 +1,9 @@
-﻿using DisplayEditorApp.Models;
+﻿//
+// vim: ts=4 et
+// Copyright (c) 2025 Petr Vanek
+// @author Petr Vanek, petr@fotoventus.cz
+
+using DisplayEditorApp.Models;
 using DisplayEditorApp.Services;
 using System;
 using System.Collections.Generic;

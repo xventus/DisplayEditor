@@ -1,4 +1,9 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿//
+// vim: ts=4 et
+// Copyright (c) 2025 Petr Vanek
+// @author Petr Vanek, petr@fotoventus.cz
+
+using CommunityToolkit.Mvvm.Input;
 using DisplayEditorApp.Settings;
 using System;
 using System.IO;

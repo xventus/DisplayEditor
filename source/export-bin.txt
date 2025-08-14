@@ -1,0 +1,10 @@
+at directory DisplayEditor\DisplayEditorApp.Desktop 
+
+# Windows
+dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+
+# Apple Silicon (M1/M2/M3…)
+dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true -p:UseAppHost=true
+
+# Intel Mac
+dotnet publish -c Release -r osx-x64   --self-contained true -p:PublishSingleFile=true -p:UseAppHost=true
