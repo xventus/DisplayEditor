@@ -509,7 +509,7 @@ namespace DisplayEditorApp.ViewModels;
 
     /// <summary>
     /// Loads subdirectories for Extended mode from the "kancional" subfolder.
-    /// Creates FileItem entries for directories 001 through 900.
+    /// Creates FileItem entries for directories 001 through 996.
     /// Marks each directory as existing or missing based on file system state.
     /// </summary>
     private void LoadExtendedModeSubFolders()
@@ -522,8 +522,8 @@ namespace DisplayEditorApp.ViewModels;
             return;
         }
 
-        // Create entries for subdirectories 001 to 900
-        for (int i = 1; i <= 900; i++)
+        // Create entries for subdirectories 001 to 996
+        for (int i = 1; i <= 996; i++)
         {
             var folderName = $"{i:D3}";
             var folderPath = Path.Combine(kancionalPath, folderName);
